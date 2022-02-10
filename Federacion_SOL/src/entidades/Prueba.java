@@ -200,11 +200,12 @@ public class Prueba {
 			System.out.println("La prueba " + this.nombre + " ha quedado cerrada.");
 		}
 	}
-
+	 
+    //este es el metodo to String adaptado a la entrega del examen 
 	@Override
 	public String toString() {
-		return "Prueba [id=" + id + ", nombre=" + nombre + ", fecha=" + fecha + ", individual=" + individual
-				+ ", lugar=" + lugar + ", arbitraje=" + Arrays.toString(arbitraje) + ", resultado=" + resultado
+		return "" + id + "" + nombre + "(" + fecha + "en" + lugar
+				+ ")"+"de tipo: " + individual + ", arbitraje=" + Arrays.toString(arbitraje) + ", resultado=" + resultado
 				+ ", participantes=" + Arrays.toString(participantes) + "]";
 	}
 
