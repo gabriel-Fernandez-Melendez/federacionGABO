@@ -202,11 +202,12 @@ public class Prueba {
 	}
 	 
     //este es el metodo to String adaptado a la entrega del examen 
+	//falta la parte de los podios, la cual no he sido capaz de realizar hasta este momentos
 	@Override
 	public String toString() {
 		return "" + id + "" + nombre + "(" + fecha + "en" + lugar
 				+ ")"+"de tipo: " + individual + ", arbitraje=" + Arrays.toString(arbitraje) + ", resultado=" + resultado
-				+ ", participantes=" + Arrays.toString(participantes) + "]";
+				+ ", participantes=" + Arrays.toString(participantes) + "]"+"primer puesto";
 	}
 
 	//Examen 1 Ejercicio 2, parte B

@@ -1,5 +1,12 @@
 package entidades;
 
+import java.io.BufferedOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.Scanner;
 import utils.Datos;
 import validaciones.Validaciones;
@@ -107,6 +114,42 @@ public class Manager {
 		ret = new Manager(id, telefono, direccion, dp);
 		return ret;
 	}
+	//metodo del ejecicio 3 del examen
+		public  String data() {
+			return " " +persona.getId()+"|"+persona.getNombre()+"|"+persona.getNifnie()+"|"+persona.getFechaNac()+"|"+persona.getTelefono()+"|"+getDireccion();
+		}
+	//siguiente parte del ejercicio he hecho un intento de importacion pero no se si lo que estoy almacenando en la variable es el 
+	//to String de data
+		public void exportar(int DatosMANAGERS[]) {
+			
+				FileOutputStream archivo;
+				try {
+					archivo = new FileOutputStream("C:/Users/gabof/Desktop/managers.txt");
+					for(int i=0;i<Datos.MANAGERS.length;i++) {
+						try {
+							archivo.write(i);
+							
+							archivo.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}	
+		}
+		public void exportarString(String data) {
+			try {
+				PrintWriter out = new PrintWriter("manager.txt");
+				out.print(data);
+				out.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			
+        }
+			
+		
 
 	/***
 	 * Función que devuelve una cadena de caracteres con los datos del mánager en el
