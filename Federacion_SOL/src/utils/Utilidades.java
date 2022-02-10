@@ -15,6 +15,8 @@ import validaciones.Validaciones;
  * @author luis
  */
 public class Utilidades extends Validaciones {
+	
+
 
 	/**
 	 * Función que pide al usuario que introduzca 's' o 'S' para Sí o 'n' o 'N' para
@@ -30,7 +32,7 @@ public class Utilidades extends Validaciones {
 		Scanner in;
 		char resp;
 		do {
-			System.out.println("Pulse s para Sí o n para No");
+			System.out.println("Pulse s para Sí o n para No?");
 			in = new Scanner(System.in, "ISO-8859-1");
 			in.reset();
 			resp = in.nextLine().charAt(0);
