@@ -1,6 +1,7 @@
 package entidades;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -203,12 +204,38 @@ public class Prueba {
 	 
     //este es el metodo to String adaptado a la entrega del examen 
 	//falta la parte de los podios, la cual no he sido capaz de realizar hasta este momentos
-	@Override
-	public String toString() {
-		return "" + id + "" + nombre + "(" + fecha + "en" + lugar
-				+ ")"+"de tipo: " + individual + ", arbitraje=" + Arrays.toString(arbitraje) + ", resultado=" + resultado
-				+ ", participantes=" + Arrays.toString(participantes) + "]"+"primer puesto";
-	}
+	///Examen 6 Ejercicio 4
+		/***
+		 * Función que devuelve una cadena de caracteres con la siguiente estructura: 
+		 * <idPrueba>”. ”<nombre>” (”<fecha(dd/mm/YYYY)>” en <lugarPrueba>) de tipo “
+		 * <individual/colectiva>“ Si la prueba dispone de equipo arbitral, se mostrarán
+		 * los nombres del equipo arbitral. Además, si está cerrada, se mostrará el
+		 * Resultado de la misma, de esta forma: “Primer puesto: “<idParticipante>”, con
+		 * el dorsal “<dorsal>” por la calle “<calle>” Oro#”<idOro>”.” “Segundo puesto:
+		 * “<idParticipante>”, con el dorsal “<dorsal>” por la calle “<calle>”
+		 * Plata#<idPlata> “Tercer puesto: “<idParticipante>”, con el dorsal “<dorsal>”
+		 * por la calle “<calle> Bronce#<idBronc>
+		 * 
+		 */
+	//comentario de luis
+	
+	//ven bien este metodo to string!
+		@Override
+		public String toString() {
+			String ret = "";
+			ret += "" + id + "." + nombre + " (" + fecha.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " en " + lugar.getNombre() + ") de tipo " + (this.isIndividual()?"individual":"colectiva")+"\n";
+			if(this.hayEquipoArbitral()) {
+				ret += this.nombresEquipoArbitral();
+			}
+			if(this.cerrada()) {
+				Resultado res = this.getResultado();
+				Participante[] podio = res.getPodio();
+				ret += "Primer puesto:"+ podio[0].getId()+", con el dorsal" + podio[0].getDorsal()+" por la calle "+ podio[0].getCalle()+" Oro#"+ res.getPrimero().getId()+"\n";
+				ret += "Segundo puesto:"+ podio[1].getId()+", con el dorsal" + podio[1].getDorsal()+" por la calle "+ podio[1].getCalle()+" Oro#"+ res.getSegundo().getId()+"\n";
+				ret += "Tercer puesto:"+ podio[2].getId()+", con el dorsal" + podio[2].getDorsal()+" por la calle "+ podio[2].getCalle()+" Oro#"+ res.getTercero().getId()+"\n";
+			}
+			return ret;
+		}
 
 	//Examen 1 Ejercicio 2, parte B
 	public static Prueba nuevaPrueba() {

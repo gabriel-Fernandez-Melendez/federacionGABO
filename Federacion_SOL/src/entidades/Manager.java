@@ -1,8 +1,10 @@
 package entidades;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -120,34 +122,42 @@ public class Manager {
 		}
 	//siguiente parte del ejercicio he hecho un intento de importacion pero no se si lo que estoy almacenando en la variable es el 
 	//to String de data
-		public void exportar(int DatosMANAGERS[]) {
-			
-				FileOutputStream archivo;
-				try {
-					archivo = new FileOutputStream("C:/Users/gabof/Desktop/managers.txt");
-					for(int i=0;i<Datos.MANAGERS.length;i++) {
-						try {
-							archivo.write(i);
-							
-							archivo.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}	
-		}
-		public void exportarString(String data) {
+		/***
+		 * Función para exportar los datos de cada uno de los mánagers de una colección
+		 * que se le pasa como parámetro, a través del método data() anterior, separando
+		 * la información de cada mánager en una línea distinta.
+		 * 
+		 * @param managers la coleccion de managers a exportar
+		 */ 
+		//comentario de luis lo de arriba!
+		private static void exportar(Manager[] managers) {
+			String path = "managers.txt";
+			File fichero = new File(path);
+			FileWriter escritor = null;
+			PrintWriter buffer = null;
 			try {
-				PrintWriter out = new PrintWriter("manager.txt");
-				out.print(data);
-				out.close();
+				try {
+					escritor = new FileWriter(fichero, false);
+					buffer = new PrintWriter(escritor);
+					for (Manager m : managers) {
+						buffer.println(m.data());
+					}
+				} finally {
+					if (buffer != null) {
+						buffer.close();
+					}
+					if (escritor != null) {
+						escritor.close();
+					}
+				}
 			} catch (FileNotFoundException e) {
-				e.printStackTrace();
+				System.out.println("Se ha producido una FileNotFoundException" + e.getMessage());
+			} catch (IOException e) {
+				System.out.println("Se ha producido una IOException" + e.getMessage());
+			} catch (Exception e) {
+				System.out.println("Se ha producido una Exception" + e.getMessage());
 			}
-			
-        }
+		}
 			
 		
 
