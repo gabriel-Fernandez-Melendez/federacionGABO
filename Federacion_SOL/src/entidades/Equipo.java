@@ -3,10 +3,21 @@ package entidades;
 import java.time.format.DateTimeFormatter;
 
 public class Equipo extends Participante {
+	
 	private long idEquipo;
 	private int anioinscripcion;
 	private Manager manager;
 	private Atleta[] atletas;
+	
+	String nombre;
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
 	public Equipo(long id, int anioinscripcion, Manager manager, Atleta[] atletas) {
 		super();

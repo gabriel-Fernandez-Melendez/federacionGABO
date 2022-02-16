@@ -1,14 +1,18 @@
 package entidades;
 
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Scanner;
 import utils.Datos;
 import validaciones.Validaciones;
@@ -17,6 +21,8 @@ public class Manager {
 	private long id;
 	private String telefono;
 	private String direccion;
+	
+	Documentacion nifnie;
 
 	private DatosPersona persona;
 
@@ -157,6 +163,63 @@ public class Manager {
 			} catch (Exception e) {
 				System.out.println("Se ha producido una Exception" + e.getMessage());
 			}
+		}
+		
+		//implementar la funcion del ejercicio 3 del examen de 16feb
+		
+		public static void exportarManagers() {
+			File ficheroM=new File("managers.txt");
+			FileReader lector = null;
+			BufferedReader buffer = null;
+			
+			 try {
+				lector=new FileReader(ficheroM);
+				buffer = new BufferedReader(lector);
+				//aqui una variable aux
+				String aux;
+				
+				
+				while((aux=buffer.readLine()) != null) {
+					String[] campos = aux.split("\\|");
+					int idpersona  = Integer.valueOf(campos[0]);
+					String nombre = campos[1];
+					String Documentos = campos[2];
+					String fechanac = campos[3];
+					String telefonoP = campos[4];
+					int idManager = Integer.valueOf(campos[5]);
+					String telefonoM = campos[6];
+					String direccionM= campos[7];
+					
+					// nom  incluyo la condicion por que no me deja comparar los datos
+				 for(Equipo e:Datos.EQUIPOS) {
+					if(e.getManager().getId()==idManager) {
+						String mensaje="D/Dña "+campos[1]+"con NIF/NIE"+Documentos+"nacido el "+
+					e.getManager().persona.getFechaNac().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+							+	"representa al equipo "+e.nombre+"de id"+e.id+"durante el año "+e.getAnioinscripcion()
+							+"conformado por los siguientes atletas"+e.getAtletas().toString();
+					}	 
+					 
+					if(e.getManager().getId()!=idManager) {
+						System.out.println("el manager"+e.getManager().persona.getNombre()+"de id"+e.getManager().id);
+					}
+						 
+					 
+				
+				 }
+				}
+				
+			} 
+			 
+			 
+			 
+			 catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			 catch (IOException e) {
+					e.printStackTrace();
+				}
+			
+			
 		}
 			
 		

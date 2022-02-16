@@ -1,5 +1,9 @@
 package entidades;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 import utils.Datos;
@@ -82,6 +86,52 @@ public class Colegiado {
 
 		ret = new Colegiado(id, cat, dp);
 		return ret;
+	}
+	
+	//ejercicio 2 del examen del 16feb
+	
+	// he implementado el metodo del ejercicio dos aqui creo que de forma correcta
+	//abriendo un file output stream  por cada uno de los ficheros que pide implementar
+	
+	public static void exportarColegeados() {
+		String path ="colegeadosjunior.dat";
+		String path2 ="colegeadossenior.dat";
+		String path3 ="colegeadosespecial.dat";
+		
+		try {
+			FileOutputStream fichero = new FileOutputStream(path,false);
+			FileOutputStream fichero2 = new FileOutputStream(path2,false);
+			FileOutputStream fichero3 = new FileOutputStream(path3,false);
+			
+			ObjectOutputStream escritor = new ObjectOutputStream(fichero);
+			ObjectOutputStream escritor2 = new ObjectOutputStream(fichero2);
+			ObjectOutputStream escritor3 = new ObjectOutputStream(fichero3);
+			
+			for(Colegiado a:Datos.COLEGIADOS) {
+				if(a.categoria==Categoria.JUNIOR ) {
+					escritor.writeObject((Colegiado) a);
+					escritor.flush();
+				}
+				if(a.categoria==Categoria.SENIOR ) {
+					escritor2.writeObject((Colegiado) a);
+					escritor2.flush();
+				}
+				if(a.categoria==Categoria.ESPECIAL ) {
+					escritor3.writeObject((Colegiado) a);
+					escritor3.flush();
+				}
+			}
+			escritor.close();
+			escritor2.close();
+			escritor3.close();
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+        catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	//Examen 5 Ejercicio 2
