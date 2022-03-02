@@ -12,6 +12,10 @@ public class Atleta extends Participante {
 	private float peso;
 
 	private DatosPersona persona;
+	
+	public Atleta() {
+		
+	}
 
 	public Atleta(long id, int dorsal, char calle, long idAtleta, float altura, float peso) {
 		super(id, dorsal, calle);

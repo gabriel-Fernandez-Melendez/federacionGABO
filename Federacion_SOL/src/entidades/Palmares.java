@@ -1,6 +1,6 @@
 package entidades;
-
-public class  Palmares<T, S> {
+//me faltaba el extends
+public class  Palmares<T extends Metal, S extends Participante> {
 	
 	private long id;
 	private  T medalla  ;
@@ -12,7 +12,7 @@ public class  Palmares<T, S> {
 	public Palmares() {	
 	}
 	
-	public Palmares(long id,T medalla,S particioante,Prueba prueba,String observaciones) {
+	public Palmares(long id,T medalla,S participante,Prueba prueba,String observaciones) {
 		this.id=id;
 		this.medalla=medalla;
 		this.participante=participante;

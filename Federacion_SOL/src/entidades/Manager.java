@@ -25,6 +25,10 @@ public class Manager {
 	Documentacion nifnie;
 
 	private DatosPersona persona;
+	
+	public Manager() {
+		
+	}
 
 	public Manager(long id, String telefono, String direccion) {
 		super();
@@ -167,7 +171,7 @@ public class Manager {
 		
 		//implementar la funcion del ejercicio 3 del examen de 16feb
 		
-		public static void exportarManagers() {
+		public static void leerManagers() {
 			File ficheroM=new File("managers.txt");
 			FileReader lector = null;
 			BufferedReader buffer = null;
@@ -206,6 +210,7 @@ public class Manager {
 					 
 				
 				 }
+				
 				}
 				
 			} 
@@ -218,6 +223,25 @@ public class Manager {
 			 catch (IOException e) {
 					e.printStackTrace();
 				}
+			 //esto me faltaba agregarlo de lo anterior 
+			 finally {
+				 if(lector!=null) {
+					 try {
+						lector.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				 }
+				 if(buffer!=null) {
+					 try {
+						buffer.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				 }
+				 
+			 }
+			 
 			
 			
 		}
